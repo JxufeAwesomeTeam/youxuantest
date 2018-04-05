@@ -1,0 +1,87 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="{% static 'img/favicon.ico' %}" />
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <title>api文档</title>
+    <!-- Bootstrap -->
+    <link href="{% static 'bootstrap-3.3.7-dist/css/bootstrap.min.css' %}" rel="stylesheet">
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <script src="/static/js/jquery-3.2.1.js"></script>
+    <link href="/static/css/index.css" rel="stylesheet"/>
+
+</head>
+<body>
+<div style="width: 80%;text-align: center;margin: 10% 10% 0 10%;">
+  <table class="table table-striped">
+      <thead><h2>api简单说明</h2></thead>
+      <tbody>
+        <tr>
+      <th></th>
+      <th>用户信息操作</th>
+      <th>登录操作</th>
+      <th>注册操作</th>
+  </tr>
+        <tr>
+      <th>GET</th>
+      <td>
+          <p>../users 获取所有用户的信息列表</p>
+          <hr>
+          <p>../users/id 通过id获取单个用户信息</p>
+      </td>
+      <td>暂无</td>
+      <td>暂无</td>
+  </tr>
+        <tr>
+      <th>POST</th>
+      <td>
+          <p>../users 创建多个新的用户并返回该用户数据</p>
+      </td>
+      <td>
+          <p>../users/login 登录验证：成功200 失败404 带提示信息message</p>
+      </td>
+      <td><p>../users/register 注册验证：成功200 失败404 带提示信息message</p></td>
+  </tr>
+        <tr>
+      <th>PUT</th>
+      <td>
+          <p>../users/id 创建单个新的用户并返回该用户数据</p>
+      </td>
+      <td>暂无</td>
+      <td>暂无</td>
+  </tr>
+        <tr>
+      <th>DELETE</th>
+      <td>
+          <p>../users/id 通过id删除用户信息</p>
+      </td>
+      <td>暂无</td>
+      <td>暂无</td>
+  </tr>
+        <tr>
+      <th>OTHERS</th>
+      <td>暂无</td>
+      <td>暂无</td>
+      <td>暂无</td>
+  </tr>
+      </tbody>
+
+</table>
+</div>
+
+
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="{% static 'js/jquery-3.2.1.js' %}"></script>
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="{% static 'bootstrap-3.3.7-dist/js/bootstrap.min.js' %}"></script>
+</body>
+</html>
