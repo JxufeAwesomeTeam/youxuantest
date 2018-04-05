@@ -31,7 +31,8 @@ def user_detail(request,pk):
     try:
         user = User.objects.get(pk=pk)
     except User.DoesNotExist:
-        return HttpResponse(status=404)
+        message = '用户不存在！'
+        return HttpResponse(status=404,content={"message":message})
 
     if request.method == 'GET':                       #查找
         serializer = UserSerializer(user)
@@ -69,8 +70,54 @@ def login(request):
             except:
                 message = "用户不存在！"
         return HttpResponse(status=404,content={"message":message})
-
     return HttpResponse(status=404,content={"message":"请登录"})
+
+def register(request):
+    if request.method == 'POST':
+        register_from = forms.RegisterForm()
+        message = '请检查填写的内容'
+        if register_from.is_valid():
+            username = register_from.cleaned_data['username']
+            password1 = register_from.cleaned_data['password1']
+            password2 = register_from.cleaned_data['password2']
+            email = register_from.cleaned_data['email']
+            sex = register_from.cleaned_data['sex']
+
+            if password1 != password2:
+                message = "两次输入的密码不同!"
+                return HttpResponse(status=404, content={"message": message})
+            elif not password1[0].isalpha():
+                message = "密码首字符应该为字母[a-z][A-Z]!"
+                return HttpResponse(status=404, content={"message": message})
+            elif password1.isspace():
+                message = "密码不能包含空格!"
+                return HttpResponse(status=404, content={"message": message})
+            elif 6 < len(password1) < 12:
+                message = "密码的长度不应该少于6位,不多于12位"
+                return HttpResponse(status=404, content={"message": message})
+            elif not password1.isalnum():
+                message = "包含非法字符,密码应该由字母[a-z][A-Z]与数字[0-9]组成!"
+                return HttpResponse(status=404, content={"message": message})
+
+            else:
+                same_name_user = User.objects.filter(username=username)
+                if same_name_user:
+                    message = "用户名已被注册，请重新选择用户名!"
+                    return HttpResponse(status=404, content={"message": message})
+
+                same_email_user = User.objects.filter(email=email)
+                if same_email_user:
+                    message = "邮箱地址已被注册，请重新选择邮箱!"
+                    return HttpResponse(status=404, content={"message": message})
+
+                new_user = User.objects.create()
+                new_user.name = username
+                new_user.password = password1
+                new_user.email = email
+                new_user.sex = sex
+                new_user.save()
+    return HttpResponse(status=404,content={"message":"请注册"})
+
 
 
 

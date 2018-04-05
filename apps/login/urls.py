@@ -3,6 +3,7 @@ from apps.login.views import *
 
 urlpatterns = [
     path('',user_list),
-    path('/<int:pk>',user_detail),
+    path('<int:pk>',user_detail),
     path('login',login),
+    path('register',register)
 ]
