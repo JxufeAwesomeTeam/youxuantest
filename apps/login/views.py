@@ -9,8 +9,6 @@ from apps.login import forms
 from apps.login.serializer import UserSerializer
 
 
-@csrf_exempt
-
 def user_list(request):
     if request.method == 'GET':
         user = User.objects.all()
@@ -50,6 +48,7 @@ def user_detail(request,pk):
         user.delete()
         return HttpResponse(status=204)
 
+@csrf_exempt
 def login(request):
     if request.method == "POST":
         login_form = forms.UserForm(request.POST)               #初始化表单
@@ -72,6 +71,7 @@ def login(request):
         return HttpResponse(status=404,content={"message":message})
     return HttpResponse(status=404,content={"message":"请登录"})
 
+@csrf_exempt
 def register(request):
     if request.method == 'POST':
         register_from = forms.RegisterForm()
