@@ -1,0 +1,28 @@
+GET http://localhost:8000/books/books
+Accept: */*
+Cache-Control: no-cache
+
+<> 2018-04-14T102948.500.txt
+
+###
+
+GET http://localhost:8000/books/books
+Accept: */*
+Cache-Control: no-cache
+
+<> 2018-04-14T031420.200.json
+
+###
+
+GET http://localhost:8080/books/books
+Accept: */*
+Cache-Control: no-cache
+
+###
+
+GET http://localhost:8080/resources
+Accept: */*
+Cache-Control: no-cache
+
+###
+
