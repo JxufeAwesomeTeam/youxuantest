@@ -1,28 +1,26 @@
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
-from django_filters.rest_framework import DjangoFilterBackend
-from rest_framework import viewsets,filters
-from rest_framework.decorators import detail_route,list_route
+from rest_framework.viewsets import ModelViewSet,ViewSet
+from rest_framework.generics import mixins,GenericAPIView
+from rest_framework.response import Response
+from rest_framework.decorators import detail_route, list_route, permission_classes
+from rest_framework.permissions import AllowAny,IsAdminUser
+from rest_framework.authentication import TokenAuthentication
 
 from apps.login.models import User
 from apps.login import forms
 from apps.login.serializer import UserSerializer
 
-class DefaultsMixin(object):
 
-    filter_backends = (
-        DjangoFilterBackend,
-        filters.SearchFilter,
-        filters.OrderingFilter,
-    )
-
-
-class UserViewSet(DefaultsMixin,viewsets.ModelViewSet):
+class UserViewSet(ViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
+    permission_classes = (AllowAny,)
+
 
     @csrf_exempt
-    def create(self, request, *args, **kwargs):
+    @list_route(methods=['post'])
+    def register(self, request):
         register_from = forms.RegisterForm(request.POST)
         message = '请检查填写的内容'
         if register_from.is_valid():
@@ -70,6 +68,8 @@ class UserViewSet(DefaultsMixin,viewsets.ModelViewSet):
     @csrf_exempt
     @list_route(methods=['post'])
     def login(self,request):
+        if request.session.get('is_login',None):
+            return HttpResponse('已登录！，请勿重复登录！')
         if request.method == "POST":
             login_form = forms.UserForm(request.POST)  # 初始化表单
             message = "请检查填写的内容!"
@@ -78,18 +78,38 @@ class UserViewSet(DefaultsMixin,viewsets.ModelViewSet):
                 password = login_form.cleaned_data['password']
                 try:
                     user = User.objects.get(username=username)  # 获得user数据
+                except:
+                    message = "用户不存在！"
+                    return HttpResponse(status=404, content={message})
+                else:
                     if user.password == password:  # 判断密码是否正确
                         request.session['is_login'] = True  # 设置session  保持登录状态
                         request.session['user_id'] = user.id  # 用户id
                         request.session['user_name'] = username  # 用户名
-                        message = "登录成功!"
-                        return HttpResponse(status=201, content={"message1": message})
+                        from rest_framework.authtoken.models import Token
+
+                        try:
+                            token = Token.objects.create(user=user)
+                        except:
+                            token = Token.objects.get(user=user)
+
+                        request.session['Token'] = token.key
+
+                        return HttpResponse(status=201, content={request.session['Token']})
                     else:
                         message = "密码不正确!"
-                except:
-                    message = "用户不存在！"
-            return HttpResponse(status=404, content={"message2": message})
-        return HttpResponse(status=404, content={"message3": "请登录"})
+                        return HttpResponse(status=404, content={message})
+            return HttpResponse(status=404, content={message})
+        return HttpResponse(status=404, content={"请登录"})
+
+    @csrf_exempt
+    @list_route(['get'])
+    def logout(self,request):
+        if not request.session.get('is_login'):
+            # 如果本来就未登录，也就没有登出一说
+            return HttpResponse('暂未登录!')
+        request.session.flush()
+        return HttpResponse(status=200,content='登出成功！')
 
 
 
