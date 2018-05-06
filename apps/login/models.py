@@ -11,9 +11,6 @@ class User(AbstractUser):
         ('female', '女')
     )
 
-
-
-    password = models.CharField(max_length=20, verbose_name='密码')
     # icon = models.ImageField(upload_to='user_icon',default='user_icon/default.jpg',verbose_name='头像')
     sex = models.CharField(max_length=32, choices=gender, default='男', verbose_name='性別')
     created_time = models.DateTimeField(auto_now_add=True, verbose_name='创建时间')
