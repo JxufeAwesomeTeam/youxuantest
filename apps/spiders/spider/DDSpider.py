@@ -42,6 +42,10 @@ def crawl(start_url,keyword,maxpage):
                 photo = photo.attrs['src']
 
 
+            if '条评论' in review:
+                review = int(review.split('条评论')[0])
+            else:
+                review = 0
             new_book = Book.objects.create(
                 typename=typename,
                 title=title,

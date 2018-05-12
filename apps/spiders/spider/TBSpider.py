@@ -27,15 +27,21 @@ def crawl(start_url,keyword,maxpage):
         loc = re.findall(r'"nick":"([^"]+)"', resp.text, re.I)
         owner = '天猫图书'
 
+
         for i in range(len(title)):
             typename = BookType.objects.get(typename__icontains=keyword)
+            if '人付款' in review[i]:
+                review_item = int(review[i].split('人付款')[0])
+            else:
+                review_item = 0
+
             new_book = Book.objects.create(
                 typename=typename,
                 title=title[i],
                 url=url[i],
                 price=price[i],
                 loc=loc[i],
-                review=review[i],
+                review=review_item,
                 photo=photo[i],
                 owner=owner,
             )

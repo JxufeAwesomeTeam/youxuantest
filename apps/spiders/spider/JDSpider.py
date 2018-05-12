@@ -1,10 +1,10 @@
 # coding:utf-8
-from urllib.request import urlopen,Request
-from urllib.parse import urlencode
+import time,random
+
 from bs4 import BeautifulSoup
 from selenium import webdriver
-import time
-import pymysql
+
+
 from apps.book.models import Book,BookType
 
 
@@ -82,6 +82,14 @@ def crawl(start_url,keyword,maxpage):
                 else:
                     title = title.get_text()
 
+            if '万+' in review:
+                review = float(review.split('万+')[0])*10000
+                review += random.randint(1,4999)
+            elif '+' in review:
+                review = int(review.split('+')[0])
+                review += random.randint(0,99)
+            else:
+                review = 0
 
 
             new_book = Book.objects.create(

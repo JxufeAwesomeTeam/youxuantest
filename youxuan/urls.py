@@ -16,14 +16,13 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from rest_framework.documentation import include_docs_urls
-from rest_framework.authtoken import views
-
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('users/',include('apps.login.urls')),
     path('books/',include('apps.book.urls')),
+    path('carts/',include('apps.cart.urls')),
+    path('history/',include('apps.history.urls')),
     path('spider/',include('apps.spiders.urls')),
     path('docs/',include_docs_urls()),
-    path('api-token-auth/', views.obtain_auth_token),
 ]

@@ -7,5 +7,6 @@ from apps.book.views import *
 router = DefaultRouter()
 # 默认使用model小写复数， base_name为小写单数
 router.register(r'books', BookViewSet, base_name='books')
-router.register(r'bookTypes',BookTypeViewSet,base_name='bookTypes')
+router.register(r'bookTypes',BookTypeViewSet,base_name='bookType')
+router.register(r'hotBooks',HotBookViewSet,base_name='hotBook')
 urlpatterns = router.urls

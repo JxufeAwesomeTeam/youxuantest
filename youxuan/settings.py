@@ -23,8 +23,8 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'u%7bwsl&r!iz!d(g@4v@grqfg-u3k0^!m+4k@@$yk&r=+a20*)'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-#DEBUG = True
-DEBUG = False
+DEBUG = True
+#DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
@@ -38,13 +38,17 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
     'rest_framework',
     'django_filters',
     'rest_framework.authtoken',
     'corsheaders',
+
     'apps.spiders',
     'apps.login',
     'apps.book',
+    'apps.cart',
+    'apps.history',
 ]
 
 MIDDLEWARE = [
@@ -63,7 +67,7 @@ REST_FRAMEWORK = {
                                 'rest_framework.filters.SearchFilter',
                                 'rest_framework.filters.OrderingFilter',),
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
-    'PAGE_SIZE': 100,
+    'PAGE_SIZE': 10,
 }
 
 CORS_ALLOW_CREDENTIALS = True
@@ -115,7 +119,7 @@ WSGI_APPLICATION = 'youxuan.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
 
-'''
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
@@ -136,6 +140,17 @@ DATABASES = {
         'PASSWORD': 'asd123456',
         'HOST': 'youxuan.mysql.pythonanywhere-services.com',
     }
+}
+'''
+
+CACHES = {
+    'default': {
+        'BACKEND': 'django_redis.cache.RedisCache',
+        'LOCATION': '127.0.0.1:6379',
+        "OPTIONS": {
+            "CLIENT_CLASS": "django_redis.client.DefaultClient",
+        },
+    },
 }
 
 

@@ -1,4 +1,4 @@
-from django.shortcuts import render ,HttpResponse
+from django.shortcuts import render,HttpResponse
 from .spider import JDSpider,TBSpider,DDSpider
 from apps.book.models import BookType
 # Create your views here.
@@ -40,7 +40,6 @@ def TBSpiderView(request):
     TBurl = "https://s.taobao.com/search"
 
     for keyword in keywords:
-
         TBSpider.crawl(TBurl, keyword.typename, page)
         print(keyword.typename+'类型已经爬完了'+str(page+1)+'页')
     return HttpResponse('Finish!')
