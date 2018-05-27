@@ -1,7 +1,7 @@
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework.viewsets import GenericViewSet
 from rest_framework.mixins import RetrieveModelMixin,DestroyModelMixin
-from rest_framework.decorators import list_route
+from rest_framework.decorators import action
 from rest_framework.response import Response
 # Create your views here.
 
@@ -26,15 +26,12 @@ class CartItemViewSet(RetrieveModelMixin,
     serializer_class = CartItemSerializer
 
     @csrf_exempt
-    @list_route(methods=['get','post'])
+    @action(methods=['get', 'post'],detail=False)
     def items(self, request):
         user_id = verify_token(request)
         if not user_id:
             return Response(data='请重新登录!', status=404)
         user = User.objects.get(id=user_id)
-
-        if request.method == 'GET':
-            pass
 
         if request.method == 'POST':
             book_id = int(request.POST.get('bid', None))
@@ -45,6 +42,7 @@ class CartItemViewSet(RetrieveModelMixin,
             else:
                 try:
                     book = Book.objects.get(id=book_id)
+
                 except:
                     return Response(data='未找到书籍', status=404)
                 else:

@@ -1,5 +1,5 @@
 import python_jwt as jwt ,jwcrypto.jwk as jwk ,datetime
-
+from django.http import HttpResponse
 
 
 LIFE_TIME = 24 #小时
@@ -24,18 +24,20 @@ def set_token(payload):
     PRIV_PEM = f1.read()
     PRIV_KEY = jwk.JWK.from_pem(PRIV_PEM)  # 私密秘钥
     f1.close()
-    if not isinstance(payload,dict):
-        return None
-    token = jwt.generate_jwt(payload,priv_key=PRIV_KEY,algorithm='RS256',lifetime=datetime.timedelta(hours=LIFE_TIME))
-    return token
+    #若payload不是dict类型的则返回None
+    if isinstance(payload,dict):
+        token = jwt.generate_jwt(payload,priv_key=PRIV_KEY,algorithm='RS256',lifetime=datetime.timedelta(hours=LIFE_TIME))
+        return token
 
 def get_token(request):
-    AUTHORIZATION = request.META['HTTP_AUTHORIZATION'].split()
-    if AUTHORIZATION[0] =='Token':
-        token = AUTHORIZATION[1]
-        return token
-    else:
-        return None
+    try:
+        AUTHORIZATION = request.META['HTTP_AUTHORIZATION'].split()
+        if AUTHORIZATION[0] =='Token':
+            token = AUTHORIZATION[1]
+            return token
+    except:
+        pass
+
 
 def verify_token(request):
     f2 = open('apps/login/pem/PUB.pem', 'rb')
@@ -44,10 +46,13 @@ def verify_token(request):
     f2.close()
 
     token = get_token(request)
-    try:
-        header, claims = jwt.verify_jwt(token, pub_key=PUB_KEY, allowed_algs=['RS256'])
-    except:
-        return None
+    if token:
+        try:
+            header, claims = jwt.verify_jwt(token, pub_key=PUB_KEY, allowed_algs=['RS256'])
+        except:
+            raise Exception('请重新登录')
+        else:
+            uid = claims['uid']
+        return int(uid)
     else:
-        uid = claims['uid']
-    return int(uid)
+        raise Exception('请使用Token验证登录')

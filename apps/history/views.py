@@ -1,7 +1,7 @@
 from django.shortcuts import render
 
 from rest_framework.viewsets import ReadOnlyModelViewSet
-from rest_framework.decorators import list_route
+from rest_framework.decorators import action
 from rest_framework.response import Response
 
 from apps.login.jwt import verify_token
@@ -16,22 +16,39 @@ class BookHistoryViewSet(ReadOnlyModelViewSet):
     serializer_class = HistorySerializer
 
     '''
-    当用户点击一个链接 即说明他访问过这个对象（书或者其他）
-    前端设置在点击连接时发送一个POST请求 其中包含访问的类型id和对象作为该类型的id
+    当用户点击一个链接 即说明他访问过这个书籍商品
+    前端设置在点击连接时发送一个GET请求 参数为书籍商品的bid 请求头需要带Token
+    
+    若之前已经有记录则更新访问时间，否则新建记录
+    
+    若未带上参数bid 则直接返回该用户全部数据
+    
+    若未带Token 则提示404
     '''
-    @list_route()
+    @action(methods=['get'],detail=False)
     def history(self,request):
         user_id = verify_token(request)
-        book_id = request.GET.get('bid',None)
-        if user_id and book_id:
+
+        if user_id:
             user = User.objects.get(id=user_id)
-            book = Book.objects.get(id=book_id)
-            newHistory = History.objects.create(user=user,book=book)
-            newHistory.save()
-            return Response(data='OJBK!',status=200)
-        elif not book_id:
-            return Response(data='参数错误！',status=404)
-        elif not user_id:
+            #查看是否有参数bid，若有则添加记录，没有则直接返回个人全部记录
+            try:
+                book_id = request.GET.get('bid', None)
+                book = Book.objects.get(id=book_id)
+            except:
+                pass
+            else:
+                # 若已经浏览过则删除原记录
+                History.objects.filter(user=user, book=book).delete()
+                # 新建记录
+                newHistory = History.objects.create(user=user, book=book)
+                newHistory.save()
+
+            #返回该用户的浏览记录
+            listHistory = History.objects.filter(user=user)
+            serializer = self.serializer_class(listHistory,many=True)
+            return Response(data=serializer.data,status=200)
+        else:
             return Response(data='请重新登录！',status=404)
 
 

@@ -3,14 +3,13 @@ from django.views.decorators.csrf import csrf_exempt
 from django.utils import timezone
 
 from rest_framework.viewsets import ViewSet,GenericViewSet
-from rest_framework.mixins import ListModelMixin,RetrieveModelMixin
-from rest_framework.decorators import list_route
-from rest_framework.permissions import IsAuthenticatedOrReadOnly
+from rest_framework.mixins import ListModelMixin,RetrieveModelMixin,UpdateModelMixin
+from rest_framework.decorators import action
 
 from .models import User
 from .forms import UserForm,RegisterForm
 from .serializer import UserSerializer
-from .jwt import set_token
+from .jwt import set_token,verify_token
 
 
 class UserViewSet(ListModelMixin,
@@ -22,12 +21,13 @@ class UserViewSet(ListModelMixin,
 
     用户信息 GET：查询单个用户信息，返回所有用户信息
 
+    信息修改 PUT：修改用户信息(beta)
     '''
     queryset = User.objects.all()
     serializer_class = UserSerializer
 
     @csrf_exempt
-    @list_route(methods=['post'])
+    @action(methods=['post'],detail=False)
     def register(self, request):
         register_from = RegisterForm(request.POST)
         message = '请检查填写的内容'
@@ -74,13 +74,14 @@ class UserViewSet(ListModelMixin,
         return HttpResponse(status=404, content={message})
 
     @csrf_exempt
-    @list_route(methods=['post'])
+    @action(methods=['post'],detail=False)
     def login(self,request):
         login_form = UserForm(request.POST)  # 初始化表单
         message = "请检查填写的内容!"
         if login_form.is_valid():  # 判断数据格式合法
             username = login_form.cleaned_data['username']
             password = login_form.cleaned_data['password']
+
             try:
                 user = self.queryset.get(username=username)  # 获得user数据
             except:
@@ -96,10 +97,28 @@ class UserViewSet(ListModelMixin,
 
                     user.last_login = timezone.now()
                     user.save()
-
                     return HttpResponse(status=201, content={token})
                 else:
                     message = "密码不正确!"
                     return HttpResponse(status=404, content={message})
         return HttpResponse(status=404, content={message})
+
+    @csrf_exempt
+    @list_route(methods=['put'])
+    def UpdateInfo(self,request):
+        uid = verify_token(request)
+        post = request.POST.dict()
+        user = User.objects.get(id=uid)
+        for key,value in post.items():
+            if key == 'username':
+                user.username = value
+            elif key == 'password':
+                user.password = value
+            elif key == 'email':
+                user.email = value
+            elif key == 'sex':
+                user.sex = value
+
+            user.save()
+        return HttpResponse('hello')
 

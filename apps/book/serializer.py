@@ -7,6 +7,7 @@ class BookTypeSerializer(serializers.ModelSerializer):
         model = BookType
         fields = ('typename',)
 
+
 class BookSerializer(serializers.ModelSerializer):
     class Meta:
         model = Book

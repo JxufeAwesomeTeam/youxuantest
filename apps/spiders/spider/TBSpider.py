@@ -12,10 +12,11 @@ def crawl(start_url,keyword,maxpage):
     for page in range(maxpage):
         payload['s'] = 44 * page + 1
 
-        resp = requests.get(start_url, params=payload)
+        headers = {'user-agent': 'Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/66.0.3359.139 Mobile Safari/537.36'}
+
+        resp = requests.get(start_url, params=payload,headers=headers)
 
         resp.encoding = 'UTF-8'
-
         # bsObj = BeautifulSoup(resp.text, 'lxml')
 
         title = re.findall(r'"raw_title":"([^"]+)"', resp.text, re.I)
