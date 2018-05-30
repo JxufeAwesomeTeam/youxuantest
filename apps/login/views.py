@@ -104,7 +104,7 @@ class UserViewSet(ListModelMixin,
         return HttpResponse(status=404, content={message})
 
     @csrf_exempt
-    @list_route(methods=['put'])
+    @action(methods=['put'],detail=False)
     def UpdateInfo(self,request):
         uid = verify_token(request)
         post = request.POST.dict()

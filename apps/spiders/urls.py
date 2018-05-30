@@ -3,7 +3,7 @@ from .views import *
 
 urlpatterns = (
     path('',Spider),
-    path('JD',JDSpiderView,name='JD'),
-    path('DD',DDSpiderView,name='DD'),
-    path('TB',TBSpiderView,name='TB'),
+    path(r'JD/<int:page>',JDSpiderView,name='JD'),
+    path(r'DD/<int:page>',DDSpiderView,name='DD'),
+    path(r'TB/<int:page>',TBSpiderView,name='TB'),
 )

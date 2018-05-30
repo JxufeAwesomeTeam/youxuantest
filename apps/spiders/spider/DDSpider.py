@@ -1,6 +1,5 @@
 import requests
 import re
-import pymysql
 from bs4 import BeautifulSoup
 
 from apps.book.models import BookType, Book
@@ -10,13 +9,13 @@ def crawl(start_url,keyword,maxpage):
 
     payload = {'key': keyword, 'category_path': '01.00.00.00.00.00', 'page_index': 1}
 
+    #爬取多少页
     for page in range(maxpage):
 
-        resp = requests.get(start_url, params=payload)
+        headers = {'user-agent': 'Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/66.0.3359.139 Mobile Safari/537.36'}
+        resp = requests.get(start_url, params=payload, headers=headers)
 
         payload['page_index'] = page + 2  # 下一页
-
-        print(payload['page_index'])
         bsObj = BeautifulSoup(resp.text, 'lxml')
 
         goods = bsObj.find("ul", {"class": "bigimg"}).findAll("li")
@@ -46,17 +45,39 @@ def crawl(start_url,keyword,maxpage):
                 review = int(review.split('条评论')[0])
             else:
                 review = 0
-            new_book = Book.objects.create(
-                typename=typename,
-                title=title,
-                url=url,
-                price=float(price),
-                loc=loc,
-                review=review,
-                photo=photo,
-                owner=owner
-            )
-            new_book.save()
+            
+            r = requests.get(url,headers=headers)
+            detail = BeautifulSoup(r.text,'lxml')
+            msg = detail.find('ul',{'class':'key clearfix'})
+
+            try:
+                ISBN = int(re.findall(r'国际标准书号ISBN：([\d]+)', msg.text)[0])
+            except:
+                ISBN = 0
+
+            # 如果已经存在则视为更新 否则为新建
+            try:
+                update_book = Book.objects.get(url=url)
+            except:
+                new_book = Book.objects.create(
+                    typename=typename,
+                    title=title,
+                    url=url,
+                    price=float(price),
+                    loc=loc,
+                    review=review,
+                    photo=photo,
+                    owner=owner,
+                    ISBN=ISBN
+                )
+                new_book.save()
+            else:
+                #更新一般的是价格、标题、图片、评论数
+                update_book.title = title
+                update_book.price = price
+                update_book.photo = photo
+                update_book.review = review
+                update_book.save()
 
     print("爬完啦！✿✿ヽ(°▽°)ノ✿撒花")
 

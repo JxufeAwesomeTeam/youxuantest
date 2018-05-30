@@ -27,6 +27,7 @@ class Book(models.Model):
     review = models.IntegerField(default=0,verbose_name="评论数")
     photo = models.URLField(max_length=1000,verbose_name="图片名")
     owner = models.CharField(choices=Choices,default='当当书城',max_length=255,verbose_name='所属书城')
+    ISBN = models.CharField(default=0,max_length=14,verbose_name='ISBN')
 
     class Meta:
         verbose_name = "书籍"

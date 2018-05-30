@@ -23,8 +23,8 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'u%7bwsl&r!iz!d(g@4v@grqfg-u3k0^!m+4k@@$yk&r=+a20*)'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-#DEBUG = True
-DEBUG = False
+DEBUG = True
+#DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
@@ -119,13 +119,13 @@ WSGI_APPLICATION = 'youxuan.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
 
-'''
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'rest_api',
+        'NAME': 'youxuan',
         'USER': 'root',
-        'PASSWORD': '123456',
+        'PASSWORD': 'asd123',
         'HOST': '127.0.0.1',
         'PORT': '3306',
         'charset':'utf8',
@@ -141,8 +141,7 @@ DATABASES = {
         'HOST': 'youxuan.mysql.pythonanywhere-services.com',
     }
 }
-
-
+'''
 CACHES = {
     'default': {
         'BACKEND': 'django_redis.cache.RedisCache',

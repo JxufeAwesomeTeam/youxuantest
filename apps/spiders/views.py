@@ -6,9 +6,9 @@ from apps.book.models import BookType
 def Spider(request):
     return render(request,'spider.html')
 
-def JDSpiderView(request):
-
-    page = 1  #爬取多少页 每页有60个商品
+def JDSpiderView(request,page):
+    if not page:
+        page = 1  #爬取多少页 每页有60个商品
 
     keywords = BookType.objects.all()
 
@@ -18,9 +18,9 @@ def JDSpiderView(request):
         print(keyword.typename+'类型已经爬完了'+str(page+1)+'页')
     return HttpResponse('Finish!')
 
-def DDSpiderView(request):
-
-    page = 2
+def DDSpiderView(request,page):
+    if not page:
+        page = 1  #爬取多少页 每页有60个商品
 
     keywords = BookType.objects.all()
 
@@ -32,8 +32,9 @@ def DDSpiderView(request):
         print(keyword.typename+'类型已经爬完了'+str(page+1)+'页')
     return HttpResponse('Finish!')
 
-def TBSpiderView(request):
-    page = 2
+def TBSpiderView(request,page):
+    if not page:
+        page = 1  #爬取多少页 每页有44个商品
 
     keywords = BookType.objects.all()
 
