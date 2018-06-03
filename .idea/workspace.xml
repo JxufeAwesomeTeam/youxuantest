@@ -2,17 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="feadf580-7f76-4f79-89a5-fa39ca99bf00" name="Default" comment="">
-      <change beforePath="" afterPath="$PROJECT_DIR$/apps/book/migrations/0002_book_isbn.py" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/apps/book/migrations/0003_auto_20180529_2013.py" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/apps/cart/migrations/0003_auto_20180529_2011.py" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/apps/book/models.py" afterPath="$PROJECT_DIR$/apps/book/models.py" />
-      <change beforePath="$PROJECT_DIR$/apps/login/views.py" afterPath="$PROJECT_DIR$/apps/login/views.py" />
       <change beforePath="$PROJECT_DIR$/apps/spiders/spider/DDSpider.py" afterPath="$PROJECT_DIR$/apps/spiders/spider/DDSpider.py" />
+      <change beforePath="$PROJECT_DIR$/apps/spiders/spider/JDSpider.py" afterPath="$PROJECT_DIR$/apps/spiders/spider/JDSpider.py" />
       <change beforePath="$PROJECT_DIR$/apps/spiders/spider/TBSpider.py" afterPath="$PROJECT_DIR$/apps/spiders/spider/TBSpider.py" />
-      <change beforePath="$PROJECT_DIR$/apps/spiders/templates/spider.html" afterPath="$PROJECT_DIR$/apps/spiders/templates/spider.html" />
-      <change beforePath="$PROJECT_DIR$/apps/spiders/urls.py" afterPath="$PROJECT_DIR$/apps/spiders/urls.py" />
-      <change beforePath="$PROJECT_DIR$/apps/spiders/views.py" afterPath="$PROJECT_DIR$/apps/spiders/views.py" />
       <change beforePath="$PROJECT_DIR$/ghostdriver.log" afterPath="$PROJECT_DIR$/ghostdriver.log" />
       <change beforePath="$PROJECT_DIR$/youxuan/settings.py" afterPath="$PROJECT_DIR$/youxuan/settings.py" />
     </list>
@@ -64,33 +57,11 @@
       <file leaf-file-name="JDSpider.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/apps/spiders/spider/JDSpider.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2730">
-              <caret line="111" column="14" lean-forward="false" selection-start-line="111" selection-start-column="14" selection-end-line="111" selection-end-column="14" />
+            <state relative-caret-position="847">
+              <caret line="106" column="0" lean-forward="false" selection-start-line="106" selection-start-column="0" selection-end-line="106" selection-end-column="0" />
               <folding>
-                <element signature="e#15#33#0" expanded="true" />
+                <element signature="e#15#36#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="urls.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/apps/spiders/urls.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="156">
-              <caret line="7" column="10" lean-forward="false" selection-start-line="7" selection-start-column="10" selection-end-line="7" selection-end-column="10" />
-              <folding>
-                <element signature="e#0#28#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="spider.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/apps/spiders/templates/spider.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="312">
-              <caret line="12" column="37" lean-forward="false" selection-start-line="12" selection-start-column="37" selection-end-line="12" selection-end-column="37" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -98,8 +69,8 @@
       <file leaf-file-name="DDSpider.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/apps/spiders/spider/DDSpider.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1950">
-              <caret line="79" column="34" lean-forward="false" selection-start-line="58" selection-start-column="12" selection-end-line="79" selection-end-column="34" />
+            <state relative-caret-position="101">
+              <caret line="57" column="28" lean-forward="false" selection-start-line="57" selection-start-column="28" selection-end-line="57" selection-end-column="28" />
               <folding>
                 <element signature="e#0#15#0" expanded="true" />
               </folding>
@@ -107,14 +78,34 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="settings.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/youxuan/settings.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="4227">
+              <caret line="195" column="45" lean-forward="false" selection-start-line="195" selection-start-column="45" selection-end-line="195" selection-end-column="45" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="TBSpider.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/apps/spiders/spider/TBSpider.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1219">
-              <caret line="53" column="60" lean-forward="true" selection-start-line="53" selection-start-column="60" selection-end-line="53" selection-end-column="60" />
+            <state relative-caret-position="-81">
+              <caret line="45" column="76" lean-forward="false" selection-start-line="45" selection-start-column="23" selection-end-line="45" selection-end-column="76" />
               <folding>
                 <element signature="e#0#15#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="models.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/apps/book/models.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="754">
+              <caret line="29" column="51" lean-forward="false" selection-start-line="29" selection-start-column="51" selection-end-line="29" selection-end-column="51" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -164,7 +155,6 @@
         <option value="$PROJECT_DIR$/newapp/views.py" />
         <option value="$PROJECT_DIR$/apps/login/serializer.py" />
         <option value="$PROJECT_DIR$/apps/cart/urls.py" />
-        <option value="$PROJECT_DIR$/apps/spiders/spider/JDSpider.py" />
         <option value="$PROJECT_DIR$/apps/cart/admin.py" />
         <option value="$PROJECT_DIR$/apps/cart/PUB.pem" />
         <option value="$PROJECT_DIR$/apps/cart/PRIV.pem" />
@@ -186,13 +176,14 @@
         <option value="$PROJECT_DIR$/apps/cart/views.py" />
         <option value="$PROJECT_DIR$/apps/history/views.py" />
         <option value="$PROJECT_DIR$/apps/login/views.py" />
-        <option value="$PROJECT_DIR$/youxuan/settings.py" />
         <option value="$PROJECT_DIR$/apps/book/models.py" />
         <option value="$PROJECT_DIR$/apps/spiders/views.py" />
         <option value="$PROJECT_DIR$/apps/spiders/urls.py" />
         <option value="$PROJECT_DIR$/apps/spiders/templates/spider.html" />
-        <option value="$PROJECT_DIR$/apps/spiders/spider/DDSpider.py" />
         <option value="$PROJECT_DIR$/apps/spiders/spider/TBSpider.py" />
+        <option value="$PROJECT_DIR$/apps/spiders/spider/JDSpider.py" />
+        <option value="$PROJECT_DIR$/apps/spiders/spider/DDSpider.py" />
+        <option value="$PROJECT_DIR$/youxuan/settings.py" />
       </list>
     </option>
   </component>
@@ -225,7 +216,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -255,12 +246,6 @@
               <item name="youxuan" type="b2602c69:ProjectViewProjectNode" />
               <item name="youxuan" type="462c0819:PsiDirectoryNode" />
               <item name="apps" type="462c0819:PsiDirectoryNode" />
-              <item name="login" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="youxuan" type="b2602c69:ProjectViewProjectNode" />
-              <item name="youxuan" type="462c0819:PsiDirectoryNode" />
-              <item name="apps" type="462c0819:PsiDirectoryNode" />
               <item name="spiders" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -273,20 +258,13 @@
             <path>
               <item name="youxuan" type="b2602c69:ProjectViewProjectNode" />
               <item name="youxuan" type="462c0819:PsiDirectoryNode" />
-              <item name="apps" type="462c0819:PsiDirectoryNode" />
-              <item name="spiders" type="462c0819:PsiDirectoryNode" />
-              <item name="templates" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="youxuan" type="b2602c69:ProjectViewProjectNode" />
-              <item name="youxuan" type="462c0819:PsiDirectoryNode" />
               <item name="youxuan" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -402,7 +380,7 @@
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.6159655" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.41935483" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32901832" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.6210856" sideWeight="0.4962963" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20260416" sideWeight="0.4962963" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Docker" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="SciView" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -498,7 +476,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/PRIV.pem" />
     <entry file="file://$APPLICATION_HOME_DIR$/helpers/pydev/pydevd.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="172">
@@ -705,22 +682,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="338">
           <caret line="15" column="22" lean-forward="false" selection-start-line="15" selection-start-column="22" selection-end-line="15" selection-end-column="22" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/youxuan/settings.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-312">
-          <caret line="125" column="24" lean-forward="false" selection-start-line="125" selection-start-column="24" selection-end-line="125" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/apps/book/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="364">
-          <caret line="29" column="51" lean-forward="false" selection-start-line="29" selection-start-column="51" selection-end-line="29" selection-end-column="51" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -738,17 +699,28 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="312">
           <caret line="12" column="37" lean-forward="false" selection-start-line="12" selection-start-column="37" selection-end-line="12" selection-end-column="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/apps/book/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="754">
+          <caret line="29" column="51" lean-forward="false" selection-start-line="29" selection-start-column="51" selection-end-line="29" selection-end-column="51" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36/Lib/site-packages/selenium/webdriver/phantomjs/webdriver.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="308">
+          <caret line="32" column="8" lean-forward="false" selection-start-line="32" selection-start-column="8" selection-end-line="32" selection-end-column="8" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/apps/spiders/urls.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="156">
+        <state relative-caret-position="182">
           <caret line="7" column="10" lean-forward="false" selection-start-line="7" selection-start-column="10" selection-end-line="7" selection-end-column="10" />
-          <folding>
-            <element signature="e#0#28#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -760,10 +732,18 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/youxuan/settings.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="4227">
+          <caret line="195" column="45" lean-forward="false" selection-start-line="195" selection-start-column="45" selection-end-line="195" selection-end-column="45" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/apps/spiders/spider/DDSpider.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1950">
-          <caret line="79" column="34" lean-forward="false" selection-start-line="58" selection-start-column="12" selection-end-line="79" selection-end-column="34" />
+        <state relative-caret-position="101">
+          <caret line="57" column="28" lean-forward="false" selection-start-line="57" selection-start-column="28" selection-end-line="57" selection-end-column="28" />
           <folding>
             <element signature="e#0#15#0" expanded="true" />
           </folding>
@@ -772,18 +752,18 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/apps/spiders/spider/JDSpider.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2730">
-          <caret line="111" column="14" lean-forward="false" selection-start-line="111" selection-start-column="14" selection-end-line="111" selection-end-column="14" />
+        <state relative-caret-position="847">
+          <caret line="106" column="0" lean-forward="false" selection-start-line="106" selection-start-column="0" selection-end-line="106" selection-end-column="0" />
           <folding>
-            <element signature="e#15#33#0" expanded="true" />
+            <element signature="e#15#36#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/apps/spiders/spider/TBSpider.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1219">
-          <caret line="53" column="60" lean-forward="true" selection-start-line="53" selection-start-column="60" selection-end-line="53" selection-end-column="60" />
+        <state relative-caret-position="-81">
+          <caret line="45" column="76" lean-forward="false" selection-start-line="45" selection-start-column="23" selection-end-line="45" selection-end-column="76" />
           <folding>
             <element signature="e#0#15#0" expanded="true" />
           </folding>

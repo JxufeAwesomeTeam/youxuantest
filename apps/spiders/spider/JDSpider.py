@@ -1,6 +1,6 @@
 # coding:utf-8
-import time,random
-
+import time,random,re
+import requests
 from bs4 import BeautifulSoup
 from selenium import webdriver
 
@@ -20,7 +20,7 @@ from apps.book.models import Book,BookType
 def crawl(start_url,keyword,maxpage):
 
     url = start_url % keyword           #拼接Url
-    driver = webdriver.PhantomJS()      #创建无界面浏览器对象
+    driver = webdriver.PhantomJS(executable_path=r"C:\Users\Administrator\AppData\Local\Programs\Python\Python36\Scripts\phantomjs-2.1.1-windows\bin\phantomjs.exe")      #创建无界面浏览器对象
     driver.get(url)                     #开始浏览
 
 
@@ -50,6 +50,7 @@ def crawl(start_url,keyword,maxpage):
 
         owner = '京东图书'
         typename = BookType.objects.get(typename__icontains=keyword)
+
 
         for book in books_list:
             title = book.find("div",{"class":"p-name"}) or book.find("div",{"class":"p-name p-name-type-2"})
@@ -91,27 +92,47 @@ def crawl(start_url,keyword,maxpage):
             else:
                 review = 0
 
+            headers = {
+                'user-agent': 'Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/66.0.3359.139 Mobile Safari/537.36'}
 
-            new_book = Book.objects.create(
-                typename = typename,
-                title=title,
-                url=url,
-                price=float(price),
-                loc=loc,
-                review=review,
-                photo=photo,
-                owner=owner
-            )
-            new_book.save()
-            i += 1
 
+            r = requests.get(url, headers=headers)
+            detail = BeautifulSoup(r.text, 'lxml')
+            try:
+                ISBN = int(re.findall(r'"ISBN":"([^"]+)"', detail.text)[0])
+            except:
+                ISBN = 0
+
+            print(ISBN)
+
+            try:
+                update_book = Book.objects.get(url=url)
+            except:
+                new_book = Book.objects.create(
+                    typename=typename,
+                    title=title,
+                    url=url,
+                    price=float(price),
+                    loc=loc,
+                    review=review,
+                    photo=photo,
+                    owner=owner,
+                    ISBN=ISBN
+                )
+                new_book.save()
+            else:
+                update_book.title = title
+                update_book.price = price
+                update_book.photo = photo
+                update_book.review = review
+                update_book.save()
 
         time.sleep(1)
         driver.find_element_by_css_selector("a[class='pn-next']").click()     #解析完成后点击下一页
-        print("-"*1000)
-        print(i)
 
     driver.quit()    #完成爬取后关闭浏览器
+
+
     print("爬完啦！✿✿ヽ(°▽°)ノ✿撒花")
         
         

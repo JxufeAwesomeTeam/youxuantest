@@ -67,10 +67,10 @@ def crawl(start_url,keyword,maxpage):
                 new_book.save()
             else:
                 #更新一般的是价格、标题、图片、评论数
-                update_book.title = title
-                update_book.price = price
-                update_book.photo = photo
-                update_book.review = review
+                update_book.title = title[i]
+                update_book.price = price[i]
+                update_book.photo = photo[i]
+                update_book.review = review_item
                 update_book.save()
 
     print("爬完啦！✿✿ヽ(°▽°)ノ✿撒花")

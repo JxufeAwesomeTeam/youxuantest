@@ -47,14 +47,20 @@ def crawl(start_url,keyword,maxpage):
                 review = 0
             
             r = requests.get(url,headers=headers)
+
             detail = BeautifulSoup(r.text,'lxml')
             msg = detail.find('ul',{'class':'key clearfix'})
 
-            try:
-                ISBN = int(re.findall(r'国际标准书号ISBN：([\d]+)', msg.text)[0])
-            except:
-                ISBN = 0
-
+            if msg:
+                try:
+                    ISBN = int(re.findall(r'国际标准书号ISBN：([\d]+)', msg.text)[0])
+                except:
+                    ISBN = 0
+            else:
+                try:
+                    ISBN = int(re.findall(r'ISBN","content":"([\d]+)"', detail.text)[0])
+                except:
+                    ISBN = 0
             # 如果已经存在则视为更新 否则为新建
             try:
                 update_book = Book.objects.get(url=url)
