@@ -24,8 +24,8 @@ SECRET_KEY = 'u%7bwsl&r!iz!d(g@4v@grqfg-u3k0^!m+4k@@$yk&r=+a20*)'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 
-#DEBUG = True
-DEBUG = False
+DEBUG = True
+#DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
@@ -210,5 +210,3 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 #配置ckeditor
 
 CKEDITOR_UPLOAD_PATH ='upload/'
-
-AUTH_USER_MODEL = 'login.User'

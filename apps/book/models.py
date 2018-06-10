@@ -40,4 +40,4 @@ class ISBNBook(models.Model):
     ISBN = models.CharField(default=0, max_length=14, verbose_name='ISBN')
     Books = models.ManyToManyField(Book,verbose_name='书籍')
     title = models.CharField(default='暂无',max_length=255,verbose_name='标题')
-    photo = models.URLField(max_length=1000,verbose_name='图片名')
+    photo = models.URLField(default='暂无',max_length=1000,verbose_name='图片名')

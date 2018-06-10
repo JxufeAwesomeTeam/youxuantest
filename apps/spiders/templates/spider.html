@@ -12,5 +12,14 @@
 <a type="button" href="{% url 'TB' 1 %}">TB</a>
 <a type="button" href="{% url 'DD' 1 %}">DD</a>
 
+<form action="/users/login/" method="post">
+First name:<br>
+<input type="text" name="username" value="username">
+<br>
+Last name:<br>
+<input type="text" name="password" value="password">
+<br><br>
+<input type="submit" value="Submit">
+</form>
 </body>
 </html>
