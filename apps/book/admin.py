@@ -7,5 +7,9 @@ class BookTypeAdmin(admin.ModelAdmin):
 
 @admin.register(Book)
 class BookAdmin(admin.ModelAdmin):
-    list_display = ('id','title','price','url','loc','review','photo',)
+    list_display = ('id','title','price','url','loc','review','photo','ISBN')
     # filter_horizontal = ('typename',)
+@admin.register(ISBNBook)
+class ISBNBookAdmin(admin.ModelAdmin):
+    list_display = ('id',)
+    filter_horizontal = ('Books',)

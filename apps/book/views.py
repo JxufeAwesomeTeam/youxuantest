@@ -6,8 +6,8 @@ from rest_framework.decorators import action
 from rest_framework.viewsets import GenericViewSet,ReadOnlyModelViewSet
 from rest_framework.mixins import RetrieveModelMixin,ListModelMixin
 
-from .models import Book, BookType
-from .serializer import BookTypeSerializer,BookSerializer
+from .models import Book, BookType,ISBNBook
+from .serializer import BookTypeSerializer,BookSerializer,ISBNSerializer
 
 
 class BookViewSet(ReadOnlyModelViewSet):
@@ -42,4 +42,6 @@ class BookTypeViewSet(ReadOnlyModelViewSet):
     queryset = BookType.objects.all()
     serializer_class = BookTypeSerializer
 
-
+class ISBNBookViewSet(ReadOnlyModelViewSet):
+    queryset = ISBNBook.objects.all()
+    serializer_class = ISBNSerializer

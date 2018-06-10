@@ -13,9 +13,9 @@ class BookType(models.Model):
         return self.typename
 
 Choices =(
-    ('当当书城','DD'),
-    ('淘宝图书','TB'),
-    ('京东图书','JD'),
+    ('DD','当当图书'),
+    ('TB','淘宝图书'),
+    ('JD','京东图书'),
 )
 class Book(models.Model):
 
@@ -35,3 +35,9 @@ class Book(models.Model):
 
     def __str__(self):
         return self.title
+
+class ISBNBook(models.Model):
+    ISBN = models.CharField(default=0, max_length=14, verbose_name='ISBN')
+    Books = models.ManyToManyField(Book,verbose_name='书籍')
+    title = models.CharField(default='暂无',max_length=255,verbose_name='标题')
+    photo = models.URLField(max_length=1000,verbose_name='图片名')

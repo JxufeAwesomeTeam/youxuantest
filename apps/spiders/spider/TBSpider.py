@@ -1,6 +1,5 @@
 import requests
 import re
-import pymysql
 from bs4 import BeautifulSoup
 
 from apps.book.models import BookType, Book
@@ -26,7 +25,7 @@ def crawl(start_url,keyword,maxpage):
         photo = re.findall(r'"pic_url":"([^"]+)"', resp.text, re.I)
         url = re.findall(r'"detail_url":"([^"]+)"', resp.text, re.I)
         loc = re.findall(r'"nick":"([^"]+)"', resp.text, re.I)
-        owner = '天猫图书'
+        owner = 'TM'
         typename = BookType.objects.get(typename__icontains=keyword)
 
 
@@ -71,6 +70,7 @@ def crawl(start_url,keyword,maxpage):
                 update_book.price = price[i]
                 update_book.photo = photo[i]
                 update_book.review = review_item
+                update_book.ISBN = ISBN
                 update_book.save()
 
     print("爬完啦！✿✿ヽ(°▽°)ノ✿撒花")

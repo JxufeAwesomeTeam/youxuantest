@@ -1,5 +1,5 @@
 from rest_framework import serializers, validators
-from .models import BookType,Book
+from .models import BookType,Book,ISBNBook
 
 
 class BookTypeSerializer(serializers.ModelSerializer):
@@ -11,6 +11,12 @@ class BookTypeSerializer(serializers.ModelSerializer):
 class BookSerializer(serializers.ModelSerializer):
     class Meta:
         model = Book
-       # fields = ('id', 'title','typename','price', 'url', 'loc', 'photo','owner')
+        fields ='__all__'
+        depth = 1
+
+class ISBNSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = ISBNBook
         fields ='__all__'
         depth = 1

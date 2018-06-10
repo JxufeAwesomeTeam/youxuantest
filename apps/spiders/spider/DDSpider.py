@@ -12,15 +12,15 @@ def crawl(start_url,keyword,maxpage):
     #爬取多少页
     for page in range(maxpage):
 
-        headers = {'user-agent': 'Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/66.0.3359.139 Mobile Safari/537.36'}
+        headers = {'HOST': 'search.dangdang.com', 'user-agent': 'Mozilla/5.0 (Windows NT 10.0;WOW64) AppleWebKit / 537.36(KHTML, likeGecko) Chrome / 66.03359.181Safari / 537.36'}
         resp = requests.get(start_url, params=payload, headers=headers)
 
         payload['page_index'] = page + 2  # 下一页
-        bsObj = BeautifulSoup(resp.text, 'lxml')
+        bsObj = BeautifulSoup(resp.text,'html.parser')
 
         goods = bsObj.find("ul", {"class": "bigimg"}).findAll("li")
 
-        owner = '当当图书'
+        owner = 'DD'
         typename = BookType.objects.get(typename__icontains=keyword)
         for good in goods:
             title = good.find("a", {"class": "pic", "name": "itemlist-picture"}).attrs['title']
@@ -48,7 +48,7 @@ def crawl(start_url,keyword,maxpage):
             
             r = requests.get(url,headers=headers)
 
-            detail = BeautifulSoup(r.text,'lxml')
+            detail = BeautifulSoup(r.text,'html.parser')
             msg = detail.find('ul',{'class':'key clearfix'})
 
             if msg:
@@ -83,6 +83,7 @@ def crawl(start_url,keyword,maxpage):
                 update_book.price = price
                 update_book.photo = photo
                 update_book.review = review
+                update_book.ISBN = ISBN
                 update_book.save()
 
     print("爬完啦！✿✿ヽ(°▽°)ノ✿撒花")

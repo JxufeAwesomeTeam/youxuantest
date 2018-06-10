@@ -48,7 +48,7 @@ def crawl(start_url,keyword,maxpage):
 
         books_list = html.find("div", {"id": "J_goodsList"}).findAll("li", {"class": "gl-item"})
 
-        owner = '京东图书'
+        owner = 'JD'
         typename = BookType.objects.get(typename__icontains=keyword)
 
 
@@ -125,6 +125,7 @@ def crawl(start_url,keyword,maxpage):
                 update_book.price = price
                 update_book.photo = photo
                 update_book.review = review
+                update_book.ISBN = ISBN
                 update_book.save()
 
         time.sleep(1)

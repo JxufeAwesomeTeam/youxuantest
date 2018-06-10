@@ -23,6 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'u%7bwsl&r!iz!d(g@4v@grqfg-u3k0^!m+4k@@$yk&r=+a20*)'
 
 # SECURITY WARNING: don't run with debug turned on in production!
+
 #DEBUG = True
 DEBUG = False
 
@@ -49,6 +50,7 @@ INSTALLED_APPS = [
     'apps.book',
     'apps.cart',
     'apps.history',
+    'apps.shares',
 ]
 
 MIDDLEWARE = [
@@ -72,7 +74,7 @@ REST_FRAMEWORK = {
 
 CORS_ALLOW_CREDENTIALS = True
 CORS_ORIGIN_ALLOW_ALL = True
-
+CORS_ORIGIN_WHITELIST = ()
 
 CORS_ALLOW_METHODS = (
     'DELETE',
@@ -81,10 +83,12 @@ CORS_ALLOW_METHODS = (
     'PATCH',
     'POST',
     'PUT',
+    'VIEW',
 )
 
 CORS_ALLOW_HEADERS = (
-    'accept',
+    'XMLHttpRequest',
+    'X_FILENAME',
     'accept-encoding',
     'authorization',
     'content-type',
@@ -93,6 +97,7 @@ CORS_ALLOW_HEADERS = (
     'user-agent',
     'x-csrftoken',
     'x-requested-with',
+    'Pragma',
 )
 
 ROOT_URLCONF = 'youxuan.urls'
@@ -189,11 +194,11 @@ USE_TZ = False
 
 STATIC_URL = '/static/'
 
-#STATICFILES_DIRS = (
-#    os.path.join(BASE_DIR, 'static'),
-#)
-
 STATIC_ROOT = os.path.join(BASE_DIR,'static')
+
+# STATICFILES_DIRS = (
+#     os.path.join(BASE_DIR, 'static'),
+# )
 
 #配置media
 
