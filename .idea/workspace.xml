@@ -74,7 +74,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="views.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/apps/login/views.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="651">
@@ -96,7 +96,7 @@
         <entry file="file://$PROJECT_DIR$/apps/spiders/templates/spider.html">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="598">
-              <caret line="23" column="7" lean-forward="true" selection-start-line="23" selection-start-column="7" selection-end-line="23" selection-end-column="7" />
+              <caret line="23" column="7" lean-forward="false" selection-start-line="23" selection-start-column="7" selection-end-line="23" selection-end-column="7" />
               <folding />
             </state>
           </provider>
@@ -148,11 +148,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="settings.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="settings.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/youxuan/settings.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="425">
-              <caret line="27" column="1" lean-forward="false" selection-start-line="27" selection-start-column="1" selection-end-line="27" selection-end-column="1" />
+            <state relative-caret-position="-1337">
+              <caret line="132" column="30" lean-forward="false" selection-start-line="132" selection-start-column="30" selection-end-line="132" selection-end-column="30" />
               <folding />
             </state>
           </provider>
@@ -232,10 +232,10 @@
         <option value="$PROJECT_DIR$/apps/login/models.py" />
         <option value="$PROJECT_DIR$/apps/login/admin.py" />
         <option value="$PROJECT_DIR$/apps/cart/migrations/0004_auto_20180610_1806.py" />
-        <option value="$PROJECT_DIR$/youxuan/settings.py" />
         <option value="$PROJECT_DIR$/apps/login/serializer.py" />
         <option value="$PROJECT_DIR$/apps/spiders/templates/spider.html" />
         <option value="$PROJECT_DIR$/apps/login/views.py" />
+        <option value="$PROJECT_DIR$/youxuan/settings.py" />
       </list>
     </option>
   </component>
@@ -898,14 +898,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/youxuan/settings.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="425">
-          <caret line="27" column="1" lean-forward="false" selection-start-line="27" selection-start-column="1" selection-end-line="27" selection-end-column="1" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/apps/login/forms.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="52">
@@ -945,7 +937,7 @@
     <entry file="file://$PROJECT_DIR$/apps/spiders/templates/spider.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="598">
-          <caret line="23" column="7" lean-forward="true" selection-start-line="23" selection-start-column="7" selection-end-line="23" selection-end-column="7" />
+          <caret line="23" column="7" lean-forward="false" selection-start-line="23" selection-start-column="7" selection-end-line="23" selection-end-column="7" />
           <folding />
         </state>
       </provider>
@@ -963,6 +955,14 @@
             <element signature="e#1723#1833#0" expanded="false" />
             <element signature="e#1860#2268#0" expanded="false" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/youxuan/settings.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1337">
+          <caret line="132" column="30" lean-forward="false" selection-start-line="132" selection-start-column="30" selection-end-line="132" selection-end-column="30" />
+          <folding />
         </state>
       </provider>
     </entry>
