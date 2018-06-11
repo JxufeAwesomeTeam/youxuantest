@@ -37,8 +37,9 @@ class Book(models.Model):
         return self.title
 
 class ISBNBook(models.Model):
+    default_type = BookType.objects.all().first()
     ISBN = models.CharField(default=0, max_length=14, verbose_name='ISBN')
     Books = models.ManyToManyField(Book,verbose_name='书籍')
     title = models.CharField(default='暂无',max_length=255,verbose_name='标题')
     photo = models.URLField(default='暂无',max_length=1000,verbose_name='图片名')
-    typename = models.ForeignKey(BookType,on_delete=models.DO_NOTHING,verbose_name='类型')
+    typename = models.ForeignKey(BookType,default=default_type,on_delete=models.DO_NOTHING,verbose_name='类型')
