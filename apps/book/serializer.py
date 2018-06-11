@@ -19,4 +19,4 @@ class ISBNSerializer(serializers.ModelSerializer):
     class Meta:
         model = ISBNBook
         fields ='__all__'
-        depth = 1
+        depth = 2

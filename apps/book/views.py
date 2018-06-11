@@ -1,3 +1,4 @@
+from django.db.models import Q, Count
 from django.views.decorators.csrf import csrf_exempt
 from django.shortcuts import get_list_or_404,get_object_or_404
 
@@ -43,7 +44,8 @@ class BookTypeViewSet(ReadOnlyModelViewSet):
     serializer_class = BookTypeSerializer
 
 class ISBNBookViewSet(ReadOnlyModelViewSet):
-    queryset = ISBNBook.objects.all()
+
+    queryset = ISBNBook.objects.annotate(Count('Books')).filter(Books__count=3)
     serializer_class = ISBNSerializer
 
     filter_fields = {

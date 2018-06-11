@@ -1,3 +1,4 @@
+from django.views.decorators.csrf import csrf_exempt
 from rest_framework.response import Response
 from rest_framework.viewsets import ReadOnlyModelViewSet
 from rest_framework.decorators import action
@@ -14,32 +15,39 @@ class BookShareViewSet(ReadOnlyModelViewSet):
     queryset = Share.objects.all()
     serializer_class = BookShareSerializer
 
-    @action(methods=['post'],detail=True)
+    @csrf_exempt
+    @action(methods=['post'],detail=False)
     def share(self,request):
-        bid = request.POST.get('bid',None)
-        uid = verify_token(request)
+        bid = int(request.POST.get('bid',None))
+        uid = int(verify_token(request))
         text = request.POST.get('text',None)
         if text:
             try:
-                new_share = Share.objects.create()
-                new_share.book = Book.objects.get(id=bid)
-                new_share.user = User.objects.get(id=uid)
+                new_share_book = Book.objects.get(id=bid)
+                new_share_user = User.objects.get(id=uid)
             except:
-                return Response('参数错误！',status=400)
+                return Response('参数错误',status=400)
             else:
-                new_share.share_text = text.encode('UTF-8')
+                new_share_share_text = text.encode('UTF-8')
+                new_share = Share.objects.create(
+                    book=new_share_book,
+                    user=new_share_user,
+                    share_text= new_share_share_text,
+            )
                 new_share.save()
+            return Response('分享成功',status=200)
         else:
-            return Response('分享内容不能为空！',status=400)
+            return Response('分享内容不能为空',status=400)
 
-
-    @action(methods=['get'],detail=True)
+    @csrf_exempt
+    @action(methods=['get'],detail=False)
     def like(self,request):
         sid = request.GET.get('sid',None)
         if sid:
             share_obj = Share.objects.get(id=sid)
             share_obj.like += 1
-            return Response('ok',status=200)
+            share_obj.save()
+            return Response('点赞ok',status=200)
         else:
             return Response('参数错误',status=400)
 

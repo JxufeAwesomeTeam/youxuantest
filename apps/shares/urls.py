@@ -1,6 +1,8 @@
 from rest_framework.routers import DefaultRouter
 
 from .views import BookShareViewSet
-router = DefaultRouter()
+router = DefaultRouter(trailing_slash=True)
 
-router.register(r'shares',BookShareViewSet,base_name='share')
+router.register(r'',BookShareViewSet,base_name='BookShare')
+
+urlpatterns = router.urls

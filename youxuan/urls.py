@@ -24,5 +24,6 @@ urlpatterns = [
     path('carts/',include('apps.cart.urls')),
     path('history/',include('apps.history.urls')),
     path('spider/',include('apps.spiders.urls')),
+    path('share/',include('apps.shares.urls')),
     path('docs/',include_docs_urls()),
 ]
