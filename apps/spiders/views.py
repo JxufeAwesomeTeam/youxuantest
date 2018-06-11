@@ -55,10 +55,12 @@ def UnionISBN(request):
         if not ISBNbooks.filter(ISBN=book.ISBN).exists():
             newISBNBook = ISBNBook.objects.create()
             newISBNBook.ISBN = book.ISBN
+            newISBNBook.typename = book.typename
             newISBNBook.Books.add(book)
             newISBNBook.save()
         else:
             oldISBNBook = ISBNBook.objects.get(ISBN=book.ISBN)
+            oldISBNBook.typename = book.typename
             oldISBNBook.Books.add(book)
             oldISBNBook.save()
 

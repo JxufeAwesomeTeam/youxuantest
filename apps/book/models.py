@@ -41,3 +41,4 @@ class ISBNBook(models.Model):
     Books = models.ManyToManyField(Book,verbose_name='书籍')
     title = models.CharField(default='暂无',max_length=255,verbose_name='标题')
     photo = models.URLField(default='暂无',max_length=1000,verbose_name='图片名')
+    typename = models.ForeignKey(BookType,on_delete=models.DO_NOTHING,verbose_name='类型')
