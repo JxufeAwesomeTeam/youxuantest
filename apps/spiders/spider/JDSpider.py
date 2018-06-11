@@ -20,7 +20,10 @@ from apps.book.models import Book,BookType
 def crawl(start_url,keyword,maxpage):
 
     url = start_url % keyword           #拼接Url
-    driver = webdriver.PhantomJS(executable_path=r"C:\Users\Administrator\AppData\Local\Programs\Python\Python36\Scripts\phantomjs-2.1.1-windows\bin\phantomjs.exe")      #创建无界面浏览器对象
+    #driver = webdriver.PhantomJS(executable_path=r"C:\Users\Administrator\AppData\Local\Programs\Python\Python36\Scripts\phantomjs-2.1.1-windows\bin\phantomjs.exe")      #创建无界面浏览器对象
+
+    driver = webdriver.PhantomJS(executable_path=r"/usr/local/bin/phantomjs")  # 创建无界面浏览器对象
+
     driver.get(url)                     #开始浏览
 
 

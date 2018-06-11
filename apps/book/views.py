@@ -45,3 +45,18 @@ class BookTypeViewSet(ReadOnlyModelViewSet):
 class ISBNBookViewSet(ReadOnlyModelViewSet):
     queryset = ISBNBook.objects.all()
     serializer_class = ISBNSerializer
+
+    filter_fields = {
+        'title': ['icontains']
+    }
+
+    @action(methods=['get'],detail=False)
+    def ByType(self,request):
+        btype = request.GET.get('btype')
+        if btype:
+            bookType = get_object_or_404(BookType, typename=btype)
+            queryset = ISBNBook.objects.filter(typename=bookType)
+            serializer = self.serializer_class(instance=queryset, many=True)
+            return Response(data=serializer.data, status=200)
+        else:
+            return Response('未找到该类型的书籍商品！', status=400)

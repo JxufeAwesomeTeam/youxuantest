@@ -25,17 +25,24 @@ class BookShareViewSet(ReadOnlyModelViewSet):
                 new_share.book = Book.objects.get(id=bid)
                 new_share.user = User.objects.get(id=uid)
             except:
-                return Response('参数错误！')
+                return Response('参数错误！',status=400)
             else:
                 new_share.share_text = text.encode('UTF-8')
                 new_share.save()
         else:
-            return Response('分享内容不能为空！')
+            return Response('分享内容不能为空！',status=400)
 
 
     @action(methods=['get'],detail=True)
     def like(self,request):
-        pass
+        sid = request.GET.get('sid',None)
+        if sid:
+            share_obj = Share.objects.get(id=sid)
+            share_obj.like += 1
+            return Response('ok',status=200)
+        else:
+            return Response('参数错误',status=400)
+
 
 
 
