@@ -57,7 +57,7 @@ class ISBNBookViewSet(ReadOnlyModelViewSet):
         btype = request.GET.get('btype')
         if btype:
             bookType = get_object_or_404(BookType, typename=btype)
-            queryset = ISBNBook.objects.filter(typename=bookType)
+            queryset = ISBNBook.objects.filter(typename=bookType).annotate(Count('Books')).filter(Books__count=3)
             serializer = self.serializer_class(instance=queryset, many=True)
             return Response(data=serializer.data, status=200)
         else:
