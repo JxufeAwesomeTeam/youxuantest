@@ -6,7 +6,7 @@ from rest_framework.response import Response
 
 from apps.login.jwt import verify_token
 from apps.login.models import User
-from apps.book.models import Book
+from apps.book.models import ISBNBook
 
 from .serializer import HistorySerializer
 from .models import History
@@ -25,31 +25,31 @@ class BookHistoryViewSet(ReadOnlyModelViewSet):
     
     若未带Token 则提示404
     '''
-    @action(methods=['get'],detail=False)
+    @action(methods=['get','post'],detail=False)
     def history(self,request):
         user_id = verify_token(request)
 
         if user_id:
             user = User.objects.get(id=user_id)
             #查看是否有参数bid，若有则添加记录，没有则直接返回个人全部记录
-            try:
-                book_id = request.GET.get('bid', None)
-                book = Book.objects.get(id=book_id)
-            except:
-                pass
-            else:
-                # 若已经浏览过则删除原记录
-                History.objects.filter(user=user, book=book).delete()
-                # 新建记录
-                newHistory = History.objects.create(user=user, book=book)
-                newHistory.save()
-
+            if request.method == 'POST':
+                try:
+                    book_id = request.POST.get('bid', None)
+                    book = ISBNBook.objects.get(id=book_id)
+                except:
+                    return Response(data='参数错误',status=400)
+                else:
+                    # 若已经浏览过则删除原记录
+                    History.objects.filter(user=user, book=book).delete()
+                    # 新建记录
+                    newHistory = History.objects.create(user=user, book=book)
+                    newHistory.save()
             #返回该用户的浏览记录
             listHistory = History.objects.filter(user=user)
             serializer = self.serializer_class(listHistory,many=True)
             return Response(data=serializer.data,status=200)
         else:
-            return Response(data='请重新登录！',status=404)
+            return Response(data='请重新登录！',status=400)
 
 
 
