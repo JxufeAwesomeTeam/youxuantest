@@ -10,7 +10,7 @@ from .models import  CartItem
 
 from apps.login.models import User
 from apps.login.jwt import verify_token
-from apps.book.models import Book
+from apps.book.models import ISBNBook
 
 class CartItemViewSet(RetrieveModelMixin,
                       DestroyModelMixin,
@@ -30,21 +30,20 @@ class CartItemViewSet(RetrieveModelMixin,
     def items(self, request):
         user_id = verify_token(request)
         if not user_id:
-            return Response(data='请重新登录!', status=404)
+            return Response(data='请重新登录!',status=404)
         user = User.objects.get(id=user_id)
 
         if request.method == 'POST':
             book_id = int(request.POST.get('bid', None))
-            quantity = int(request.POST.get('bcount', None)) or 1
 
-            if not book_id and quantity and user_id:
+            if not book_id and user_id:
                 return Response(data='参数错误')
             else:
                 try:
-                    book = Book.objects.get(id=book_id)
+                    book = ISBNBook.objects.get(id=book_id)
 
                 except:
-                    return Response(data='未找到书籍', status=404)
+                    return Response(data='未找到书籍', status=400)
                 else:
                     try:
                         Item = CartItem.objects.get(
@@ -55,12 +54,10 @@ class CartItemViewSet(RetrieveModelMixin,
                         newCartItem = CartItem.objects.create(
                             user=user,
                             book=book,
-                            quantity=quantity
                         )
                         newCartItem.save()
                     else:
-                        Item.quantity += quantity
-                        Item.save()
+                        return Response(data='已加入收藏夹',status=400)
 
         instances = CartItem.objects.filter(user=user)
         serializer = CartItemSerializer(instance=instances, many=True)
