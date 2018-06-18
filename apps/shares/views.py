@@ -7,7 +7,7 @@ from rest_framework.decorators import action
 from .models import Share
 from .serializer import BookShareSerializer
 
-from apps.book.models import Book
+from apps.book.models import ISBNBook
 from apps.login.models import User
 from apps.login.jwt import verify_token
 # Create your views here.
@@ -23,7 +23,7 @@ class BookShareViewSet(ReadOnlyModelViewSet):
         text = request.POST.get('text',None)
         if text:
             try:
-                new_share_book = Book.objects.get(id=bid)
+                new_share_book = ISBNBook.objects.get(id=bid)
                 new_share_user = User.objects.get(id=uid)
             except:
                 return Response('参数错误',status=400)

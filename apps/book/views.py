@@ -62,3 +62,17 @@ class ISBNBookViewSet(ReadOnlyModelViewSet):
             return Response(data=serializer.data, status=200)
         else:
             return Response('未找到该类型的书籍商品！', status=400)
+    @action(methods=['get'],detail=False)
+    def x(self,request):
+        x = request.GET.get('x')
+        if x == '':
+            queryset = self.queryset[:50]
+        elif x == 'choose':
+            queryset = self.queryset[:50].order_by('title')
+        elif x == 'new':
+            queryset = self.queryset.order_by('ISBN')[:50]
+        else:
+            queryset = self.queryset[:50]
+
+        serializer = self.serializer_class(instance=queryset, many=True)
+        return Response(data=serializer.data, status=200)
