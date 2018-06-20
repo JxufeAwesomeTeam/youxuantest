@@ -65,15 +65,12 @@ class ISBNBookViewSet(ReadOnlyModelViewSet):
     @action(methods=['get'],detail=False)
     def x(self,request):
         x = request.GET.get('x')
-        python = BookType.objects.get(typename='Python')
-        java = BookType.objects.get(typename='Java')
-        PHP = BookType.objects.get(typename='PHP')
         if x == 'hot':
-            queryset = self.queryset.filter(typename=java)[:18]+self.queryset.filter(typename=python)[:18]+self.queryset.filter(typename=PHP)[:18]
+            queryset = self.queryset[:50]
         elif x == 'choose':
-            queryset = self.queryset.order_by('id').filter(typename=java)[:18]|self.queryset.order_by('id').filter(typename=python)[:18]|self.queryset.order_by('id').filter(typename=PHP)[:18]
+            queryset = self.queryset.order_by('title')[:50]
         elif x == 'new':
-            queryset = queryset = self.queryset.order_by('-id').filter(typename=java)[:18]|self.queryset.order_by('-id').filter(typename=python)[:18]|self.queryset.order_by('-id').filter(typename=PHP)[:18]
+            queryset = self.queryset.order_by('ISBN')[:50]
         else:
             queryset = self.queryset[:50]
 
