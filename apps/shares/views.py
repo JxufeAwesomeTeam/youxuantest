@@ -18,9 +18,9 @@ class BookShareViewSet(ReadOnlyModelViewSet):
     @csrf_exempt
     @action(methods=['post'],detail=False)
     def share(self,request):
-        bid = int(request.POST.get('bid',None))
+        bid = int(request.POST.get('bid'))
         uid = int(verify_token(request))
-        text = request.POST.get('text',None)
+        text = request.POST.get('text')
         if text:
             try:
                 new_share_book = ISBNBook.objects.get(id=bid)
@@ -28,11 +28,10 @@ class BookShareViewSet(ReadOnlyModelViewSet):
             except:
                 return Response('参数错误',status=400)
             else:
-                new_share_share_text = text.encode('UTF-8')
                 new_share = Share.objects.create(
                     book=new_share_book,
                     user=new_share_user,
-                    share_text= new_share_share_text,
+                    share_text= text,
             )
                 new_share.save()
             return Response('分享成功',status=200)
@@ -51,7 +50,18 @@ class BookShareViewSet(ReadOnlyModelViewSet):
         else:
             return Response('参数错误',status=400)
 
+    @csrf_exempt
+    @action(methods=['get'],detail=False)
+    def allshare(self,request):
+        uid = int(verify_token(request))
+        if uid:
+            user = User.objects.get(id=uid)
+            queryset = self.queryset.filter(user=user)
+            serializer = self.serializer_class(instance=queryset,many=True)
+            return Response(serializer.data,status=200)
 
+        else:
+            return Response('请重新登录',status=400)
 
 
 
