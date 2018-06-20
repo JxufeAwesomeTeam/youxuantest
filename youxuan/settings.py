@@ -25,8 +25,8 @@ SECRET_KEY = 'u%7bwsl&r!iz!d(g@4v@grqfg-u3k0^!m+4k@@$yk&r=+a20*)'
 # SECURITY WARNING: don't run with debug turned on in production!
 
 
-DEBUG = True
-#DEBUG = False
+#DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
@@ -123,7 +123,7 @@ WSGI_APPLICATION = 'youxuan.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
 
-
+'''
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
@@ -150,7 +150,7 @@ DATABASES = {
         'charset':'utf8',
     }
 }
-'''
+
 
 CACHES = {
     'default': {
